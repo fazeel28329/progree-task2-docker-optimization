@@ -95,3 +95,25 @@ docker exec progree-container whoami
 ## Conclusion
 
 This project demonstrates Docker containerization, production image optimization, environment configuration, and container networking for a Node.js web application.
+## Docker Image Optimization Results
+
+The project compares a standard single-stage Docker image with an optimized multi-stage Alpine-based image.
+
+| Metric | Baseline | Optimized |
+|---|---|---|
+| Docker disk usage | 1.65 GB | 243 MB |
+| Content size | 413 MB | 61.4 MB |
+| Base image | node:22 | node:22-alpine |
+| Build approach | Single-stage | Multi-stage |
+
+**Results:**
+- Docker disk usage reduced by approximately **85.3%**.
+- Image content size reduced by approximately **85.1%**.
+- Production-only dependencies are installed using `npm ci --omit=dev`.
+- The production container runs as a non-root user.
+
+The improvements reflect the combined effects of the smaller Alpine base image and the multi-stage build configuration.
+
+### Evidence
+
+![Docker Image Size Comparison](screenshots/06-image-size-comparison.png)
